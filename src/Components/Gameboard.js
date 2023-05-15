@@ -9,15 +9,24 @@ export default function Gameboard(props) {
     const [charList, setCharList] = useState([])
     const [mapList, setMapList] = useState([])
     const [buttonVisibility, setButtonVisibility] = useState(true)
-    const [characterAlive, setCharacterAlive] = useState(3)
+    const [characterAlive, setCharacterAlive] = useState([])
+    const [level, setLevel] = useState(1)
+
  
     useEffect(() => {
         buildCharList()
         buildMapList()
     }, [])
 
+    useEffect(() => {
+        console.log('Decrease')
+    }, [props.timer])
+
     function handleEndRound() {
-        if (characterAlive === 0) <EndScene />
+        if (characterAlive.length === charList.length) {
+            props.setText('You Found All')
+            props.increaseScore()
+        }
     }
 
     function buildMapList() {
@@ -53,30 +62,31 @@ export default function Gameboard(props) {
             const xPos = Math.floor(Math.random() * (maxX  + 1))   
             const yPos = Math.floor(Math.random() * (maxY  + 1))
             return [
-                <div
+                <Character
+                setText={props.setText}
+                src={char}
                   style={{
-                    position: 'relative',
                     left: `${xPos}px`,
                     top: `${yPos - (index * charHeight)}px`,
-                    width: '70px',
-                    height: '70px',
-                    backgroundImage: `url(${char})`,
-                    backgroundColor: 'none',
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
                   }}
                   key = {index}
-                  onClick = {(handleCharFound)}
-                ><Character/></div>
-              ];
+                  onClick={handleCharFound}
+                ></Character>
+            ];
         })
 
         ReactDOM.render(charElements, gameboard)
         props.setText('Find Waldo, Lady Waldo and Wizzard')
     }
 
-    function handleCharFound() {
-        handleEndRound();
+    function handleCharFound(event) {
+        if (!characterAlive.includes(event.target.src)) {
+            const newCharacterAlive = characterAlive
+            newCharacterAlive.push(event.target.src)
+            setCharacterAlive(newCharacterAlive)
+            handleEndRound();
+        }
+    
     }
 
     function handleButton() {
