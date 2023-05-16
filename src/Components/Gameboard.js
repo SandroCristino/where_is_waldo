@@ -8,26 +8,59 @@ import '../Styles/Gameboard.css'
 export default function Gameboard(props) {
     const [charList, setCharList] = useState([])
     const [mapList, setMapList] = useState([])
-    const [buttonVisibility, setButtonVisibility] = useState(true)
     const [characterAlive, setCharacterAlive] = useState([])
-    const [level, setLevel] = useState(1)
+    const [roundActive, setRoundActive] = useState(false)
 
  
     useEffect(() => {
         buildCharList()
         buildMapList()
+        console.log('Reload useEffect()')
     }, [])
 
     useEffect(() => {
-        console.log('Decrease')
+        if (props.timer === 0 && roundActive) handleEndScene()
     }, [props.timer])
+
+    function handleEndScene() {
+        const gameboard = document.getElementById('gameboard')
+        gameboard.style.backgroundImage = ('')
+        const currentScore = props.score
+        ReactDOM.render( 
+            <EndScene 
+            handleButton={handleButton}
+            score={currentScore}
+            />, gameboard)
+    }
+
+    const resetCharacterAlive = () => {
+        const newArray = []
+        setCharacterAlive(newArray)
+    }
 
     function handleEndRound() {
         if (characterAlive.length === charList.length) {
-            props.setText('You Found All')
-            props.increaseScore()
+          
+          // Update text and score
+          props.setText('You Found All')
+          props.increaseScore()
+
+          //Update round/ reset data
+            setRoundActive(false)
+            props.toggleTimer()
+
+          // Display select buttons
+          const gameboard = document.getElementById('gameboard')
+          const buttonGroup = () => (
+                <>
+                    <button onClick={handleButton} className='startGameBtn btn btn-info position-absolute'>Start Game</button>
+                    <button onClick={handleEndScene} className='leaveGameBtn btn btn-danger position-absolute'>Leave Game</button>
+                </>
+          )
+          ReactDOM.render(buttonGroup(), gameboard)
         }
-    }
+      }
+      
 
     function buildMapList() {
         function importAll(r) {
@@ -46,7 +79,7 @@ export default function Gameboard(props) {
     }
 
     function handleSetupGameboard() {
-        const map = mapList.shift()
+        const map = mapList.slice().sort(() => Math.random() - 0.5)[0]
         const gameboard = document.getElementById('gameboard')
         gameboard.style.backgroundImage = `url(${map})`
 
@@ -76,6 +109,7 @@ export default function Gameboard(props) {
         })
 
         ReactDOM.render(charElements, gameboard)
+
         props.setText('Find Waldo, Lady Waldo and Wizzard')
     }
 
@@ -83,25 +117,29 @@ export default function Gameboard(props) {
         if (!characterAlive.includes(event.target.src)) {
             const newCharacterAlive = characterAlive
             newCharacterAlive.push(event.target.src)
-            setCharacterAlive(newCharacterAlive)
-            handleEndRound();
+            setCharacterAlive(newCharacterAlive);
         }
-    
+        // if (!characterAlive.includes(event.target.src)) {
+        //     const newCharacterAlive = [...characterAlive, event.target.src];
+        //     setCharacterAlive(newCharacterAlive);
+        //     console.log(newCharacterAlive)
+        // }
+        handleEndRound()
+        console.log(`Char:${charList.length}, Alive:${characterAlive.length}`)    
     }
 
     function handleButton() {
+        resetCharacterAlive()
+        setRoundActive(true)
         handleSetupGameboard()
-        setButtonVisibility(false)
+        props.toggleTimer()
     }
 
         return (
         <div  className='gameBoardDiv'>
             <div id='gameboard'>
-            </div>
-            {buttonVisibility && (
-                 <button onClick={handleButton} className='btn btn-info position-absolute'>Start Game</button>
-            )}
-           
+                <button onClick={handleButton} className='startGameBtn btn btn-info position-absolute'>Start Game</button>
+           </div>
         </div>
         )
 }

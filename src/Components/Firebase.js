@@ -1,7 +1,8 @@
-import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import "firebase/storage";
+import 'firebase/database' 
+import {getDatabase} from "firebase/database";
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDmUt0hG_HpmxqBSc2UKbthc0G1ltV_U0o",
@@ -9,12 +10,10 @@ const firebaseConfig = {
     projectId: "where-is-waldo-480cb",
     storageBucket: "where-is-waldo-480cb.appspot.com",
     messagingSenderId: "1096433498602",
-    appId: "1:1096433498602:web:646cc593e4db04f00cda93"
+    appId: "1:1096433498602:web:646cc593e4db04f00cda93",
+    databaseURL: 'https://where-is-waldo-480cb-default-rtdb.europe-west1.firebasedatabase.app'
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+export const database = getDatabase(app)
 
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
-export default firebase;

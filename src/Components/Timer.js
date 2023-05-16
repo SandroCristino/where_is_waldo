@@ -4,8 +4,7 @@ export default function MyComponent(props) {
 
   useEffect(() => {
     let interval = null;
-
-    if (props.seconds > 0) {
+    if (props.seconds > 0 && props.timerActive) {
       interval = setInterval(() => {
         props.decreaseTimer()
       }, 1000);
@@ -14,7 +13,7 @@ export default function MyComponent(props) {
     }
 
     return () => clearInterval(interval);
-  }, [props.seconds]);
+  }, [props.seconds, props.timerActive]);
 
 
   return (
