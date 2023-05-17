@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import '../Styles/EndScene.css'
-import { getDatabase, ref, set, get, child } from 'firebase/database';
+import { ref, set, get, child } from 'firebase/database';
 import { v4 } from 'uuid';
+import { database } from '../Components/Firebase'; 
+
 
  
 export default function EndScene(props) {
@@ -9,16 +11,14 @@ export default function EndScene(props) {
     const [highScores, setHighScores] = useState([]);
 
     function writeUserData(name, score) {
-        const db = getDatabase();
-        set(ref(db, 'users/' + v4()), {
+        set(ref(database, 'users/' + v4()), {
           username: name,
           score: score,
         });
     }
 
     function readDataBase() {
-        const db = getDatabase();
-        const dbRef = ref(db);
+        const dbRef = ref(database);
         get(child(dbRef, `users/`)).then((snapshot) => {
           if (snapshot.exists()) {
             setHighScores(Object.entries(snapshot.val()))
@@ -37,7 +37,7 @@ export default function EndScene(props) {
         readDataBase()
     }, []);
     
-    function uploadUsername(event) {
+    function uploadUsername() {
         const input = document.getElementById('userName')
         const text = input.value
         writeUserData(text, props.score)
@@ -51,13 +51,16 @@ export default function EndScene(props) {
                 {isLoading ? (
                     <div>Loading...</div>
                 ) : (
-                    <ul className="highScore list-group w-100">
-                        {highScores.map(([key, entry]) => (
-                        <li key={key} className="list-group-item">
-                            {entry.username}: {entry.score}
-                        </li>
-                        ))}
-                    </ul>
+                    <div className='w-100 listDiv'>
+                        <ul className="highScore list-group w-100">
+                            {highScores.map(([key, entry]) => (
+                            <li key={key} className="list-group-item">
+                                {entry.username}: {entry.score}
+                            </li>
+                            ))}
+                        </ul>
+                    </div>
+                 
                 )}
                 <input id='userName' type="text" className='form-control mt-3 w-100' placeholder='Enter your name'/>
                 <div className='d-flex mt-3'>

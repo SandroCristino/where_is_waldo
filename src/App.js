@@ -30,6 +30,10 @@ function App() {
     setTimerActive(prevTimerActive => !prevTimerActive);
   };
 
+  const resetTimer = () => {
+    setTimer(30)
+  }
+
   return (
     <div className="App">
       <Header text={textBox} score={score} timer={timer} decreaseTimer={decreaseTimer} timerActive={timerActive}/>
@@ -40,6 +44,7 @@ function App() {
       resetScore={resetScore} 
       timer={timer} 
       toggleTimer={toggleTimer}
+      resetTimer={resetTimer}
       /> 
       <Footer />
     </div>
