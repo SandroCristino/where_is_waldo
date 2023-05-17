@@ -6,6 +6,7 @@ export default function Character(props) {
     const [clicked, setClicked] = useState(false);
 
     function handleClick(event) {
+        // If character isn't clicked 
         if (!clicked) {
             event.target.classList.add('glow')
             setClicked(true)

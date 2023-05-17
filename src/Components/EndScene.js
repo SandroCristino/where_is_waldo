@@ -10,13 +10,17 @@ export default function EndScene(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [highScores, setHighScores] = useState([]);
 
+    // Write data and make it ready to upload
     function writeUserData(name, score) {
+
+        // Data get a randomly number from v4
         set(ref(database, 'users/' + v4()), {
           username: name,
           score: score,
         });
     }
 
+    // Read data from database
     function readDataBase() {
         const dbRef = ref(database);
         get(child(dbRef, `users/`)).then((snapshot) => {
@@ -25,6 +29,8 @@ export default function EndScene(props) {
           } else {
             console.log("No data available");
           }
+
+          // If process is done, loading while false and data is display 
           setIsLoading(false)
         }).catch((error) => {
           console.error(error);
@@ -33,6 +39,7 @@ export default function EndScene(props) {
         
     }
 
+    // Read database in the beginning of the code
     useEffect(() => {
         readDataBase()
     }, []);

@@ -1,9 +1,12 @@
 import React, {useEffect } from 'react';
 
-export default function MyComponent(props) {
+export default function Timer(props) {
 
+  // Counting down to zero
   useEffect(() => {
     let interval = null;
+
+    // Either counter is greater zero or timer is active 
     if (props.seconds > 0 && props.timerActive) {
       interval = setInterval(() => {
         props.decreaseTimer()

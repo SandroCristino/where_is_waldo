@@ -15,7 +15,6 @@ export default function Gameboard(props) {
     const [showEndButtonScene, setShowEndButtonScene] = useState(false)
     const [score, setScore] = useState(0)
 
- 
     useEffect(() => {
         buildCharImages()
         buildMapList()
@@ -80,17 +79,20 @@ export default function Gameboard(props) {
     }
 
     function handleSetupGameboard() {
+
+        // Randomly map 
         const map = mapList.slice().sort(() => Math.random() - 0.5)[0]
         const gameboard = document.getElementById('gameboard')
         gameboard.style.backgroundImage = `url(${map})`
 
-
+        // Get character information data
         const gameboardRect = gameboard.getBoundingClientRect()
         const charWidth = 70
         const charHeight = 70
         const maxX = gameboardRect.width - charWidth 
         const maxY = gameboardRect.height - charHeight
 
+        // Place character map
         const newCharList = charImages.slice().sort(() => Math.random() - 0.5);
         const charElements = newCharList.map((char, index) => {
             const xPos = Math.floor(Math.random() * (maxX  + 1))   
@@ -113,6 +115,7 @@ export default function Gameboard(props) {
         props.setText('Find Waldo, Lady Waldo and Wizzard')
     }
 
+    // Safe character live status
     function handleCharFound(event) {
         if (!characterAlive.includes(event.target.src)) {
             const newCharacterAlive = characterAlive
@@ -123,6 +126,7 @@ export default function Gameboard(props) {
         console.log(`Char:${charImages.length}, Alive:${characterAlive.length}`)    
     }
 
+    // Start/ New game button
     function handleButton() {
         resetCharacterAlive()
         setRoundActive(true)
@@ -134,6 +138,7 @@ export default function Gameboard(props) {
         props.resetScore()
     }
 
+    // Next game button
     function handleNextGame() {
         setRoundActive(true)
         handleSetupGameboard()
