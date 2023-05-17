@@ -1,6 +1,5 @@
 #characterImg {
-  background-color: none;
-  width: 150px; 
+  width: 70px; 
   height: 70px;
   background-color: none;
   background-size: contain;
@@ -9,9 +8,9 @@
 }
 
 .glow {
-    box-shadow: 0 0 10px 5px rgba(245, 1, 1, 0.7);
+    box-shadow: 0 0 20px 5px rgba(227, 45, 45, 0.954);
     animation: glow-animation 1s infinite alternate;
-  }
+}
   
   @keyframes glow-animation {
     from {

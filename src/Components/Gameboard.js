@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ReactDOM, { createPortal } from 'react-dom';
+import ReactDOM from 'react-dom';
 import Character from './Character'
 import EndScene from './EndScene'
 import '../Styles/Gameboard.css'

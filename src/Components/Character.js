@@ -5,8 +5,6 @@ import '../Styles/Character.css'
 export default function Character(props) {
     const [clicked, setClicked] = useState(false);
 
-
-    // eslint-disable-next-line no-unused-vars
     function handleClick(event) {
         if (!clicked) {
             event.target.classList.add('glow')
@@ -34,7 +32,7 @@ export default function Character(props) {
     }
 
     return (
-        <div>
+        <div className='imgContainer'>
             <img src={props.src} style={{
                 left: props.style.left,
                 top: props.style.top

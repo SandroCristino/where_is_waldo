@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Timer from '../Components/Timer'
 
 export default function Navbar(props) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">

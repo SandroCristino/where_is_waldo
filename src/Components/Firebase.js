@@ -14,6 +14,10 @@ const firebaseConfig = {
     databaseURL: 'https://where-is-waldo-480cb-default-rtdb.europe-west1.firebasedatabase.app'
 };
 
+
+
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app)
+
+
 
