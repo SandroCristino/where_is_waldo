@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/where_is_waldo/static/css/main.2079dbd6.css",
+    "main.js": "/where_is_waldo/static/js/main.1433ae02.js",
+    "static/media/map2.jpg": "/where_is_waldo/static/media/map2.495126395f4789cbfa8d.jpg",
+    "static/media/map1.jpg": "/where_is_waldo/static/media/map1.2e6e9ff957b42df59bea.jpg",
+    "static/media/char1.png": "/where_is_waldo/static/media/char1.a850ac137ae54c33d666.png",
+    "static/media/char2.png": "/where_is_waldo/static/media/char2.2a39a7164ee240f10903.png",
+    "static/media/map3.jpg": "/where_is_waldo/static/media/map3.4b75a80665e3aaf9d8ba.jpg",
+    "static/media/char3.png": "/where_is_waldo/static/media/char3.aa2f7cbad15de2e8f36e.png",
+    "index.html": "/where_is_waldo/index.html",
+    "main.2079dbd6.css.map": "/where_is_waldo/static/css/main.2079dbd6.css.map",
+    "main.1433ae02.js.map": "/where_is_waldo/static/js/main.1433ae02.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2079dbd6.css",
+    "static/js/main.1433ae02.js"
+  ]
+}
