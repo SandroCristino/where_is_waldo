@@ -3,7 +3,7 @@
 ## This is a where is waldo clone
 
   <div style="margin-right:10px;">
-    <img src="./src/assets/Screenshot.jpeg" alt="screenshot of website" width="400" />
+    <img src="./src/Assets/Screenshot.jpeg" alt="screenshot of website" width="400" />
   </div>
 
 #
