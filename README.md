@@ -19,7 +19,7 @@
 
 ## Live Demo
 
-[Where Is Waldo:]https://sandywezzy.github.io/where_is_waldo/
+[Where Is Waldo:]https://sandrocristino.github.io/where_is_waldo/
 
 #
 
